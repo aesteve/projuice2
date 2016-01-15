@@ -1,18 +1,18 @@
 import grails.util.Environment
-import static grails.util.Environment.DEVELOPMENT
 import projuice2.Role
 import projuice2.User
 import projuice2.UserRole
 
+import static grails.util.Environment.DEVELOPMENT
 
 class BootStrap {
 
-    def init = { servletContext ->
+	def init = { servletContext ->
 
 		Environment env = Environment.current
 		if (env != DEVELOPMENT) return
 
-        Role adminRole = new Role('ROLE_ADMIN').save()
+		Role adminRole = new Role('ROLE_ADMIN').save()
 		Role userRole = new Role('ROLE_USER').save()
 
 		User admin = new User('me', 'password')
@@ -30,8 +30,8 @@ class BootStrap {
 		assert Role.count() == 2
 		assert UserRole.count() == 1
 
-    }
+	}
 
-    def destroy = {
-    }
+	def destroy = {
+	}
 }

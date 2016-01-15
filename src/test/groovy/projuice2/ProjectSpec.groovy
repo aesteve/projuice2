@@ -10,36 +10,36 @@ import spock.lang.Unroll
 @TestFor(Project)
 class ProjectSpec extends Specification {
 
-    def setup() {}
+	def setup() {}
 
-    def cleanup() {}
+	def cleanup() {}
 
 	def getValidProject() {
 		new Project(name: 'Name', description: 'Description', creationDate: new Date())
 	}
 
 	@Unroll
-    void "#field is mandatory and should not be blank"() {
+	void "#field is mandatory and should not be blank"() {
 
 		setup:
 		def proj = validProject
 		proj[field] = value
 
-        when:"Validating the project"
+		when: "Validating the project"
 		def valid = proj.validate()
 
-        then:"The project is not valid and has an error"
+		then: "The project is not valid and has an error"
 		def error = proj.errors.getFieldErrors field
 		!valid && proj.hasErrors() && error
 
-		and:"The rejected value is #value"
+		and: "The rejected value is #value"
 		error.rejectedValue == [value]
 
 		where:
 		field << ['name', 'description']
 		value << [null, '']
 
-    }
+	}
 
 	void "Creation date should not be null"() {
 
@@ -47,14 +47,14 @@ class ProjectSpec extends Specification {
 		def proj = validProject
 		proj.creationDate = null
 
-		when:"Creating a project with no creation date"
+		when: "Creating a project with no creation date"
 		def valid = proj.validate()
 
-		then:"The project is not valid and has an error"
+		then: "The project is not valid and has an error"
 		def error = proj.errors.getFieldErrors 'creationDate'
 		!valid && proj.hasErrors() && error
 
-		and:"The rejected value is #value"
+		and: "The rejected value is #value"
 		println error.class
 		error.rejectedValue == [null]
 

@@ -6,8 +6,8 @@ class Project {
 	String description
 	Date creationDate
 
-    static constraints = {
+	static constraints = {
 		name blank: false
 		description blank: false
-    }
+	}
 }
