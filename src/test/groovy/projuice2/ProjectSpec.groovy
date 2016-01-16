@@ -15,7 +15,8 @@ class ProjectSpec extends Specification {
 	def cleanup() {}
 
 	def getValidProject() {
-		new Project(name: 'Name', description: 'Description', creationDate: new Date())
+		User testUser = new User('test', 'test@projuice.io')
+		new Project(name: 'Name', description: 'Description', creationDate: new Date(), creator: testUser)
 	}
 
 	@Unroll
@@ -55,7 +56,6 @@ class ProjectSpec extends Specification {
 		!valid && proj.hasErrors() && error
 
 		and: "The rejected value is #value"
-		println error.class
 		error.rejectedValue == [null]
 
 	}

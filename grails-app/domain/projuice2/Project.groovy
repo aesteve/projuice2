@@ -5,6 +5,7 @@ class Project {
 	String name
 	String description
 	Date creationDate
+	User creator
 
 	static constraints = {
 		name blank: false
